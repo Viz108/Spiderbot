@@ -121,6 +121,55 @@ void loop()
 
         break;
       }
+      case IR_4: {
+        Serial.println("Pressed on button 4");
+        digitalWrite(green_led, HIGH);
+        lift_leg_1();
+        delay(100);
+
+        break;
+      }
+      case IR_5:{
+        Serial.println("Pressed on button 5");
+        digitalWrite(green_led, HIGH);
+        lift_leg_2();
+        delay(100);
+
+        break;
+      }
+      case IR_6:{
+        Serial.println("Pressed on button 6");
+        digitalWrite(green_led, HIGH);
+        lift_leg_3();
+        delay(100);
+
+        break;
+      }
+      case IR_7:{
+        Serial.println("Pressed on button 7");
+        digitalWrite(green_led, HIGH);
+        lift_leg_4();
+        delay(100);
+
+        break;
+      }
+      case IR_8:{
+        Serial.println("Pressed on button 8");
+        digitalWrite(green_led, HIGH);
+        walk_init();
+        delay(100);
+
+        break;
+      }
+      case IR_9:{
+        Serial.println("Pressed on button 9");
+        digitalWrite(green_led, HIGH);
+        walk();
+        delay(100);
+
+        break;
+      }
+      
 
       }
       default: {
@@ -133,16 +182,16 @@ void loop()
 }
 
 void default_stand() {
-  serPos0 = 200; //default servo positions
+  serPos0 = 220; //default servo positions
  serPos1 = 220;
  serPos2 = 280;
- serPos3 = 200;
+ serPos3 = 180;
  serPos4 = 180;
   serPos5 = 120;
-  serPos6 = 200;
+  serPos6 = 180;
   serPos7 = 160;
   serPos8 = 90;
-  serPos9 = 200;
+  serPos9 = 220;
   serPos10 = 200;
   serPos11 = 300;
   HCPCA9685.Servo(0, serPos0);//default position //claw
@@ -253,3 +302,193 @@ void wave(){
 
 
 }
+
+void lift_leg_1()
+{
+
+  serPos0 = 220; //default servo positions
+ serPos1 = 220;
+ serPos2 = 280;
+  
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(1, serPos1);
+    serPos1--;
+    delay(10);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(0, serPos0);
+    serPos0++;
+    delay(10);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(2, serPos2);
+    serPos2++; 
+    delay(10);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(0, serPos0);
+    serPos0--;
+    delay(10);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(1, serPos1);
+    serPos1++;
+    delay(10);    
+  }
+}
+
+void lift_leg_2()
+{
+
+  serPos3 = 200;
+ serPos4 = 180;
+  serPos5 = 120;
+  
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(4, serPos4);
+    serPos4++;
+    delay(10);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(5, serPos5);
+    serPos5++; 
+    delay(10);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(4, serPos4);
+    serPos4--;
+    delay(10);
+  }
+}
+
+void lift_leg_3()
+{
+
+  serPos6 = 200;
+  serPos7 = 160;
+  serPos8 = 90;
+  
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(7, serPos7);
+    serPos7++;
+    delay(9);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(8, serPos8);
+    serPos8--; 
+    delay(9);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(7, serPos7);
+    serPos7--;
+    delay(9);
+  }
+}
+
+
+void lift_leg_4()
+{
+
+  serPos9 = 200;
+  serPos10 = 200;
+  serPos11 = 300;
+  
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(10, serPos10);
+    serPos10--;
+    delay(9);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(11, serPos11);
+    serPos11--; 
+    delay(9);
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(10, serPos10);
+    serPos10++;
+    delay(9);
+  }
+}
+
+
+void walk_init()
+{
+  serPos0 = 200; //default servo positions
+ serPos1 = 220;
+ serPos2 = 320;
+ serPos3 = 200;
+ serPos4 = 180;
+  serPos5 = 120;
+  serPos6 = 200;
+  serPos7 = 160;
+  serPos8 = 180;
+  serPos9 = 200;
+  serPos10 = 200;
+  serPos11 = 200;
+
+  HCPCA9685.Servo(0, serPos0);
+  HCPCA9685.Servo(1, serPos1);
+  HCPCA9685.Servo(2, serPos2);
+  HCPCA9685.Servo(3, serPos3);
+  HCPCA9685.Servo(4, serPos4);
+  HCPCA9685.Servo(5, serPos5);
+  HCPCA9685.Servo(6, serPos6);
+  HCPCA9685.Servo(7, serPos7);
+  HCPCA9685.Servo(8, serPos8);
+  HCPCA9685.Servo(9, serPos9);
+  HCPCA9685.Servo(10, serPos10);
+  HCPCA9685.Servo(11, serPos11);
+  
+}
+
+void walk()
+{
+  serPos0 = 200; //default servo positions
+ serPos1 = 220;
+ serPos2 = 320;
+ serPos3 = 200;
+ serPos4 = 180;
+  serPos5 = 120;
+  serPos6 = 200;
+  serPos7 = 160;
+  serPos8 = 180;
+  serPos9 = 200;
+  serPos10 = 200;
+  serPos11 = 200;
+
+  //Lift leg 3 and move forward
+  for(int i = 0; i < 80; i++)
+  {
+    HCPCA9685.Servo(7, serPos7);
+    serPos7++;
+  }
+  for(int i = 0; i < 80; i++)
+  {
+    HCPCA9685.Servo(8, serPos8);
+    serPos8--;
+  }
+  for(int i = 0; i < 60; i++)
+  {
+    HCPCA9685.Servo(6, serPos6);
+    serPos6--;
+  }
+  
+}
+
+
+
+
