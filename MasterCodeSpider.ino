@@ -1,5 +1,4 @@
-
-#include "HCPCA9685.h"
+#include <HCPCA9685.h>
 #include <IRremote.h>
 #define IR_RECEIVE_PIN 6
 #define red_led 4
@@ -470,7 +469,7 @@ void walk()
   serPos10 = 200;
   serPos11 = 200;
 
-  //Lift leg 3 and move forward
+  //Step 1: Lift leg 3 
   for(int i = 0; i < 80; i++)
   {
     HCPCA9685.Servo(7, serPos7);
@@ -486,9 +485,49 @@ void walk()
     HCPCA9685.Servo(6, serPos6);
     serPos6--;
   }
-  
+
+  //Step 2: Extend leg 3 and place foot down
+  for(int i = 0; i < 80; i++)
+  {
+    HCPCA9685.Servo(6, serPos6);
+    serPos6--;
+  }
+  for(int i = 0; i < 80; i++)
+  {
+    HCPCA9685.Servo(7, serPos7);
+    serPos7--;
+  }
+
+  //Step 3: Move forward
+  for(int i = 0; i < 40; i++)
+  {
+    //Leg 1 moves back
+    HCPCA9685.Servo(2, serPos2);
+    serPos2--;
+    //Leg 2 moves back
+    HCPCA9685.Servo(5, serPos5);
+    serPos5++;
+    HCPCA9685.Servo(3, serPos3);
+    serPos2--;
+    //Leg 3 moves back
+    HCPCA9685.Servo(8, serPos8);
+    serPos8--;
+    //Leg 4 moves back
+    HCPCA9685.Servo(11, serPos11);
+    serPos11--;
+  }
+
+  //Step 4: Lift leg 2 and move forward
+  for(int i = 0; i < 80; i++)
+  {
+    HCPCA9685.Servo(4, serPos4);
+    serPos4++;
+  }
+  for(int i = 0; i < 40; i++)
+  {
+    HCPCA9685.Servo(5, serPos5);
+    serPos5--;
+  }
 }
-
-
 
 
