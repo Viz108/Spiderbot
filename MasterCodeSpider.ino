@@ -93,7 +93,7 @@ void loop()
         Serial.println("Pressed on Pause");
         digitalWrite(green_led, HIGH);
         delay(100);
-        default_stand();
+        //default_stand();
         break;
       case IR_1: { //stand
         Serial.println("Pressed on button 1");
@@ -475,7 +475,7 @@ void walk()
     HCPCA9685.Servo(7, serPos7);
     serPos7++;
   }
-  for(int i = 0; i < 80; i++)
+  for(int i = 0; i < 100; i++)
   {
     HCPCA9685.Servo(8, serPos8);
     serPos8--;
@@ -486,48 +486,77 @@ void walk()
     serPos6--;
   }
 
+  delay(5000);
+
   //Step 2: Extend leg 3 and place foot down
-  for(int i = 0; i < 80; i++)
-  {
-    HCPCA9685.Servo(6, serPos6);
-    serPos6--;
-  }
+  // for(int i = 0; i < 80; i++)
+  // {
+  //   HCPCA9685.Servo(6, serPos6);
+  //   serPos6--;
+  // }
   for(int i = 0; i < 80; i++)
   {
     HCPCA9685.Servo(7, serPos7);
     serPos7--;
   }
 
+  delay(5000);
+
   //Step 3: Move forward
-  for(int i = 0; i < 40; i++)
+  for(int i = 0; i < 200; i++)
   {
     //Leg 1 moves back
-    HCPCA9685.Servo(2, serPos2);
-    serPos2--;
+    if(serPos2 > 190)
+    {
+      HCPCA9685.Servo(2, serPos2);
+      serPos2--;
+    }
     //Leg 2 moves back
-    HCPCA9685.Servo(5, serPos5);
-    serPos5++;
-    HCPCA9685.Servo(3, serPos3);
-    serPos2--;
+    if(serPos5 > 80)
+    {
+      HCPCA9685.Servo(5, serPos5);
+      serPos5--;
+    }
+    if(serPos3 > 140)
+    {
+      HCPCA9685.Servo(3, serPos3);
+      serPos3--;
+    }
+   
     //Leg 3 moves back
-    HCPCA9685.Servo(8, serPos8);
-    serPos8--;
+    if(serPos8 < 120)
+    { 
+      HCPCA9685.Servo(8, serPos8);
+      serPos8++;
+    }
+    if(serPos6 < 140)
+    {
+      HCPCA9685.Servo(6, serPos6);
+      serPos6++;
+    }
+
     //Leg 4 moves back
-    HCPCA9685.Servo(11, serPos11);
-    serPos11--;
+    if(serPos11 < 290)
+    {
+      HCPCA9685.Servo(11, serPos11);
+      serPos11++;
+    }
+    delay(1);
   }
 
-  //Step 4: Lift leg 2 and move forward
-  for(int i = 0; i < 80; i++)
-  {
-    HCPCA9685.Servo(4, serPos4);
-    serPos4++;
-  }
-  for(int i = 0; i < 40; i++)
-  {
-    HCPCA9685.Servo(5, serPos5);
-    serPos5--;
-  }
+  delay(5000);
+
+  // //Step 4: Lift leg 2 and move forward
+  // for(int i = 0; i < 80; i++)
+  // {
+  //   HCPCA9685.Servo(4, serPos4);
+  //   serPos4++;
+  // }
+  // for(int i = 0; i < 40; i++)
+  // {
+  //   HCPCA9685.Servo(5, serPos5);
+  //   serPos5--;
+  // }
 }
 
 
